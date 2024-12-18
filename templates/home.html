@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Home - Book Recommendation{% endblock %}
+{% block content %}
+<h1 class="text-center text-primary">Book Recommendation System</h1>
+<form id="recommendation-form" class="my-4">
+    <div class="form-group">
+        <input type="text" id="book-title" class="form-control" placeholder="Enter book title" autocomplete="off" required>
+        <div id="autocomplete-list" class="autocomplete-suggestions"></div>
+    </div>
+    <button type="submit" class="btn btn-success btn-block">Get Recommendations</button>
+</form>
+<div id="recommendations"></div>
+<script>
+    const books = {{ books|tojson }};
+    
+    document.getElementById('book-title').addEventListener('input', function() {
+        const input = this.value.toLowerCase();
+        const suggestions = books.filter(book => book.toLowerCase().startsWith(input));
+        const suggestionBox = document.getElementById('autocomplete-list');
+        suggestionBox.innerHTML = '';
+        suggestions.forEach(suggestion => {
+            const suggestionElement = document.createElement('div');
+            suggestionElement.classList.add('autocomplete-suggestion');
+            suggestionElement.textContent = suggestion;
+            suggestionElement.addEventListener('click', function() {
+                document.getElementById('book-title').value = suggestion;
+                suggestionBox.innerHTML = '';
+            });
+            suggestionBox.appendChild(suggestionElement);
+        });
+    });
+
+    document.getElementById('recommendation-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const bookTitle = document.getElementById('book-title').value;
+        fetch('/recommend', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: bookTitle })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const recommendationsDiv = document.getElementById('recommendations');
+            recommendationsDiv.innerHTML = '<h2>Recommended Books:</h2>';
+            if (data.error) {
+                recommendationsDiv.innerHTML += `<div class="alert alert-danger">${data.error}</div>`;
+            } else {
+                const ul = document.createElement('ul');
+                ul.classList.add('list-group');
+                data.forEach(book => {
+                    const li = document.createElement('li');
+                    li.classList.add('list-group-item');
+                    li.innerHTML = `<strong>${book.title}</strong><br>Author: ${book.authors}<br>Publisher: ${book.publisher}`;
+                    ul.appendChild(li);
+                });
+                recommendationsDiv.appendChild(ul);
+            }
+        });
+    });
+</script>
+{% endblock %}
