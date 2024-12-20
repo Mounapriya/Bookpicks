@@ -6,7 +6,7 @@
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.x+-orange)](https://scikit-learn.org/stable/)
 [![pandas](https://img.shields.io/badge/pandas-1.x+-blueviolet)](https://pandas.pydata.org/)
 
-![Demo of the Book Recommendation App](images/demo.gif)
+![Demo of the Book Recommendation App](https://github.com/Mounapriya/Bookpicks/blob/main/Img.gif)
 
 This project is a web-based book recommendation system built using Python, Flask, and machine learning techniques. It allows users to enter a book title and receive a list of similar books based on content analysis.
 
