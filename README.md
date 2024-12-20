@@ -39,7 +39,6 @@ This project is a web-based book recommendation system built using Python, Flask
 3.  Enter a book title in the search box and click "Get Recommendations".
 
 ## Technical Details
-## Technical Details
 
 This project uses a combination of frontend and backend technologies:
 
