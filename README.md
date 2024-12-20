@@ -39,13 +39,17 @@ This project is a web-based book recommendation system built using Python, Flask
 3.  Enter a book title in the search box and click "Get Recommendations".
 
 ## Technical Details
+## Technical Details
 
-The recommendation engine works as follows:
+This project uses a combination of frontend and backend technologies:
 
-1.  **Data Preprocessing:** The book data (title, author, publisher, language code) is combined into a single "tags" field.
-2.  **TF-IDF Vectorization:** The TF-IDF (Term Frequency-Inverse Document Frequency) algorithm is used to convert the text data into numerical vectors.
-3.  **Cosine Similarity:** Cosine similarity is calculated between the vectors to determine the similarity between books.
-4.  **Recommendations:** The top 5 most similar books are returned as recommendations.
+*   **Frontend:** The user interface is built using HTML for structure, CSS for styling, and client-side JavaScript for interactive elements like the auto-complete search box. Bootstrap is used for responsive design and styling.
+*   **Backend:** The backend logic, including data loading, preprocessing, recommendation engine, and API endpoints, is implemented in Python using the Flask framework.
+*   **Recommendation Engine:**
+    1.  **Data Preprocessing:** The book data (title, author, publisher, language code) is combined into a single "tags" field.
+    2.  **TF-IDF Vectorization:** The TF-IDF (Term Frequency-Inverse Document Frequency) algorithm is used to convert the text data into numerical vectors.
+    3.  **Cosine Similarity:** Cosine similarity is calculated between the vectors to determine the similarity between books.
+    4.  **Recommendations:** The top 5 most similar books are returned as recommendations.
 
 ## Data Source
 
